@@ -22,14 +22,29 @@
     };
 
     Greetr.prototype = {
-        fullname() {
+        fullName: function() {
             return this.firstName + ' ' + this.lastName;
         },
-        validate() {
+        validate: function() {
             if (supportedLanguages.indexOf(this.language) === -1) throw "Invalid language.";
         },
-        greeting() {
+        greeting: function() {
             return greetings[this.language] + ' ' + this.firstName;
+        },
+        formalGreeting: function() {
+            return formalGreetings[this.language] + ', ' + this.fullName();
+        },
+        greet: function(formal) {
+            var msg;
+            if (formal) {
+                msg = this.formalGreeting();
+            } else {
+                msg = this.greeting();
+            }
+            if (console) {
+                console.log(msg);
+            }
+            return this;
         }
     };
 
