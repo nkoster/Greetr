@@ -1,17 +1,44 @@
 (function(global) {
 
-    var Greetr = function(firstname, lastname, language) {
-        return new Greetr.init(firstname, lastname, language)
+    var Greetr = function(firstName, lastName, language) {
+        return new Greetr.init(firstName, lastName, language)
     }
 
-    Greetr.prototype = {};
+    var supportedLanguages = ['nl', 'en'];
 
-    Greetr.init = function(firstname, lastname, language) {
+    var greetings = {
+        nl: 'Hallo',
+        en: 'Hello'
+    };
+
+    var formalGreetings = {
+        nl: 'Groeten',
+        en: 'Greetings'
+    };
+
+    var logMessages = {
+        nl: 'Log nl',
+        en: 'Log en'
+    };
+
+    Greetr.prototype = {
+        fullname() {
+            return this.firstName + ' ' + this.lastName;
+        },
+        validate() {
+            if (supportedLanguages.indexOf(this.language) === -1) throw "Invalid language.";
+        },
+        greeting() {
+            return greetings[this.language] + ' ' + this.firstName;
+        }
+    };
+
+    Greetr.init = function(firstName, lastName, language) {
 
         var self = this;
 
-        self.firstname = firstname || 'No';
-        self.lastname = lastname || 'Name';
+        self.firstName = firstName || 'No';
+        self.lastName = lastName || 'Name';
         self.language = language || 'be';
     
     }
