@@ -1,3 +1,3 @@
-var g = $G('Niels', 'Koster');
+var g = $G('Niels', 'Koster', 'nl');
 
-console.log(g);
+console.log(g.greeting());
