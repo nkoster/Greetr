@@ -1,5 +1,6 @@
 var g = $G('Niels', 'Koster', 'nl');
-
-console.log(g.greeting());
-console.log(g.formalGreeting());
-console.log(g.greet(true).greet(false));
+g.greet()
+g.setLanguage('en');
+g.greet(true);
+g.setLanguage('nl');
+g.greet(true);
