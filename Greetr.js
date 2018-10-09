@@ -1,4 +1,4 @@
-(function(global) {
+(function(global, $) {
 
     var Greetr = function(firstName, lastName, language) {
         return new Greetr.init(firstName, lastName, language)
@@ -17,8 +17,8 @@
     };
 
     var logMessages = {
-        nl: 'Log nl',
-        en: 'Log en'
+        nl: 'Een login van: ',
+        en: 'A login from: '
     };
 
     Greetr.prototype = {
@@ -38,40 +38,53 @@
         greet: function(formal) {
             var msg;
             if (formal) {
-                msg = this.formalGreeting();
+                msg = this.formalGreeting()
             } else {
-                msg = this.greeting();
+                msg = this.greeting()
             }
             if (console) {
-                console.log(msg);
+                console.log(msg)
             }
-            return this;
+            return this
         },
         log: function() {
             if (console) {
                 console.log(logMessages[this.language] + ': ' + this.fullName())
             }
-            return this;
+            return this
         },
         setLanguage: function(lang) {
             this.language = lang;
             this.validate();
-            return this;
+            return this
+        },
+        setGreeting: function(selector, formal) {
+            if (!$) {
+                throw 'jQuery not available.'
+            }
+            if (!selector) {
+                throw 'Nothing selected.'
+            }
+            var msg;
+            if (formal) {
+                msg = this.formalGreeting()
+            } else {
+                msg = this.greeting()
+            }
+            $(selector).html(msg);
+            return this
         }
     };
 
     Greetr.init = function(firstName, lastName, language) {
-
         var self = this;
-
         self.firstName = firstName || 'No';
         self.lastName = lastName || 'Name';
-        self.language = language || 'be';
+        self.language = language || 'be'
     
     }
 
     Greetr.init.prototype = Greetr.prototype;
+    global.Greetr = global.$G = Greetr
 
-    global.Greetr = global.$G = Greetr;
-
-}(window))
+}(window, jQuery))
