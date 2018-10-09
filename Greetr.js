@@ -1,9 +1,11 @@
 (function(global, $) {
 
+    // "new" an object
     var Greetr = function(firstName, lastName, language) {
         return new Greetr.init(firstName, lastName, language)
     }
 
+    // hidden within the scope of the IIFE, and never directly accessible
     var supportedLanguages = ['nl', 'en'];
 
     var greetings = {
@@ -21,6 +23,7 @@
         en: 'A login from: '
     };
 
+    // All methods and public stuff should live here
     Greetr.prototype = {
         fullName: function() {
             return this.firstName + ' ' + this.lastName;
@@ -76,15 +79,19 @@
         }
     };
 
+    // constructor, called with "new", to make sure the prototype is on the object
     Greetr.init = function(firstName, lastName, language) {
+        // "self" can be used in functions that live here, within this scope,
+        // because "this" will refer to the global scope!
         var self = this;
         self.firstName = firstName || 'No';
         self.lastName = lastName || 'Name';
         self.language = language || 'be'
-    
     }
 
+    // force the init functions prototype to the Greetr objects prototype
     Greetr.init.prototype = Greetr.prototype;
+    // make the "framework" available on the global obkect
     global.Greetr = global.$G = Greetr
 
 }(window, jQuery))
