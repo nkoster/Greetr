@@ -1,4 +1,4 @@
-(function(global, $) {
+;(function(global, $) {
 
     // "new" an object
     var Greetr = function(firstName, lastName, language) {
@@ -79,17 +79,20 @@
         }
     };
 
-    // constructor, called with "new", to make sure the prototype is on the object
+    // Constructor, to make sure the prototype is on the object ("new").
+    // The actual object is created here, allowing us to "new" an object
+    // without calling "new".
     Greetr.init = function(firstName, lastName, language) {
         // "self" can be used in functions that live here, within this scope,
         // because "this" will refer to the global scope!
         var self = this;
         self.firstName = firstName || 'No';
         self.lastName = lastName || 'Name';
-        self.language = language || 'be'
+        self.language = language || 'nl';
+        self.validate()
     }
 
-    // force the init functions prototype to the Greetr objects prototype
+    // force the init functions prototype to be on the Greetr objects prototype
     Greetr.init.prototype = Greetr.prototype;
     // make the "framework" available on the global obkect
     global.Greetr = global.$G = Greetr
